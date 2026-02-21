@@ -1,0 +1,177 @@
+From 99a8aad19f269c087dc20474e91c4b40a6f3abf9 Mon Sep 17 00:00:00 2001
+From: chlorodose <chlorodose@chlorodose.me>
+Date: Tue, 24 Feb 2026 09:57:47 +0800
+Subject: [PATCH] Patch kernel spec
+
+---
+ kernel.spec | 82 +++++++++++++++++++++++++++++++++++++++++++++++------
+ 1 file changed, 74 insertions(+), 8 deletions(-)
+
+diff --git a/kernel.spec b/kernel.spec
+index 15593a6..ca305d6 100644
+--- a/kernel.spec
++++ b/kernel.spec
+@@ -144,9 +144,9 @@ Summary: The Linux kernel
+ %endif
+ 
+ # Default compression algorithm
+-%global compression xz
+-%global compression_flags --compress --check=crc32 --lzma2=dict=1MiB
+-%global compext xz
++%global compression zstd
++%global compression_flags --rm --ultra -22 --long -T0
++%global compext zst
+ 
+ %if 0%{?fedora}
+ %define primary_target fedora
+@@ -187,13 +187,13 @@ Summary: The Linux kernel
+ %define specrpmversion 6.19.3
+ %define specversion 6.19.3
+ %define patchversion 6.19
+-%define pkgrelease 300
++%define pkgrelease chker
+ %define kversion 6
+ %define tarfile_release 6.19.3
+ # This is needed to do merge window version magic
+ %define patchlevel 19
+ # This allows pkg_release to have configurable %%{?dist} tag
+-%define specrelease 300%{?buildid}%{?dist}
++%define specrelease %{pkgrelease}%{?buildid}%{?dist}
+ # This defines the kabi tarball version
+ %define kabiversion 6.19.3
+ 
+@@ -233,7 +233,7 @@ Summary: The Linux kernel
+ #      with_base controls base vs debug within those variants
+ %define with_base      %{?_without_base:      0} %{?!_without_base:      1}
+ # build also debug variants
+-%define with_debug     %{?_without_debug:     0} %{?!_without_debug:     1}
++%define with_debug     %{?_with_debug:     1} %{?!_with_debug:     0}
+ # kernel-zfcpdump (s390 specific kernel for zfcpdump)
+ %define with_zfcpdump  %{?_without_zfcpdump:  0} %{?!_without_zfcpdump:  1}
+ # kernel-16k (aarch64 kernel with 16K page_size)
+@@ -327,7 +327,7 @@ Summary: The Linux kernel
+ 
+ #
+ # check for mismatched config options
+-%define with_configchecks %{?_without_configchecks:        0} %{?!_without_configchecks:        1}
++%define with_configchecks 0
+ 
+ #
+ # gcov support
+@@ -990,6 +990,29 @@ BuildRequires: redhat-sb-certs >= 9.4-0.1
+ %endif
+ %endif
+ 
++
++Source6000:         detect-x86_64-version.c
++########################### CachyOS Is Here ###########################
++Patch4000:         https://raw.githubusercontent.com/CachyOS/kernel-patches/refs/heads/master/%{patchversion}/all/0001-cachyos-base-all.patch
++Patch4001:         https://raw.githubusercontent.com/CachyOS/kernel-patches/refs/heads/master/%{patchversion}/sched/0001-bore-cachy.patch
++
++%if %{with clang_lto}
++Patch4002:         https://raw.githubusercontent.com/CachyOS/kernel-patches/refs/heads/master/%{patchversion}/misc/dkms-clang.patch
++%endif
++############################ Bcachefs Is Here ############################
++## Check for updates on https://evilpiepirate.org/bcachefs-tools
++%global _bch_ver 1.36.1
++Source7000:         https://evilpiepirate.org/bcachefs-tools/bcachefs-tools-%{_bch_ver}.tar.zst
++Patch4010:          https://github.com/chlorodose/bcachefs/commit/86da85122637f024ed809faea9b28095a70d84c3.patch
++
++############################ NVIDIA Is Here  #############################
++## Check for updates on https://github.com/NVIDIA/open-gpu-kernel-modules
++%global _nv_ver 590.48.01
++Source8000:         https://github.com/NVIDIA/open-gpu-kernel-modules/archive/refs/tags/%{_nv_ver}.tar.gz
++Patch5000:          https://raw.githubusercontent.com/CachyOS/kernel-patches/refs/heads/master/%{patchversion}/misc/nvidia/0001-Enable-atomic-kernel-modesetting-by-default.patch
++Patch5999:          https://raw.githubusercontent.com/CachyOS/kernel-patches/refs/heads/master/%{patchversion}/misc/nvidia/0003-Fix-compile-for-6.19.patch
++
++
+ # Because this is the kernel, it's hard to get a single upstream URL
+ # to represent the base without needing to do a bunch of patching. This
+ # tarball is generated from a src-git tree. If you want to see the
+@@ -2160,11 +2183,28 @@ ApplyOptionalPatch()
+ %{log_msg "Untar kernel tarball"}
+ %setup -q -n kernel-%{tarfile_release} -c
+ mv linux-%{tarfile_release} linux-%{KVERREL}
+-
++tar -xaf %{SOURCE8000}
+ cd linux-%{KVERREL}
+ cp -a %{SOURCE1} .
+ 
+ %{log_msg "Start of patch applications"}
++rm -rf fs/bcachefs && mkdir -p fs/bcachefs
++tar -C fs/bcachefs --zstd --strip-components=2 -xf "%{SOURCE7000}" "bcachefs-tools-%{_bch_ver}/libbcachefs"
++if ! grep -q "fs/bcachefs/Kconfig" "fs/Kconfig"; then
++    sed -i '/source "fs\/btrfs\/Kconfig"/a source "fs/bcachefs/Kconfig"' 'fs/Kconfig'
++fi
++if ! grep -q "bcachefs/" "fs/Makefile"; then
++    sed -i '/obj-$(CONFIG_BTRFS_FS).*+= btrfs\//a obj-$(CONFIG_BCACHEFS_FS) += bcachefs/' 'fs/Makefile'
++fi
++%autopatch -p1 -m4000 -M4100
++
++pushd "../open-gpu-kernel-modules-%{_nv_ver}/kernel-open"
++    %autopatch -p1 -m5000 -M 5990
++    pushd ..
++        %patch -p1 5999
++    popd
++popd
++
+ %if !%{nopatches}
+ 
+ ApplyOptionalPatch patch-%{patchversion}-redhat.patch
+@@ -2388,6 +2428,12 @@ cp_vmlinux()
+ %if !%{with_cross}
+ %define build_hostcflags  %{?build_cflags}
+ %define build_hostldflags %{?build_ldflags}
++%ifarch x86_64
++    %{build_cc} %{build_cflags} %{SOURCE6000} -o detect-x86_64-version
++    X86_64_VERSION="$(./detect-x86_64-version)"
++    rm detect-x86_64-version
++
++%endif
+ %endif
+ 
+ %define make %{__make} %{?cross_opts} %{?make_opts} HOSTCFLAGS="%{?build_hostcflags}" HOSTLDFLAGS="%{?build_hostldflags}"
+@@ -2428,6 +2474,10 @@ InitBuildVars() {
+     %{make} %{?_smp_mflags} mrproper
+     cp configs/$Config .config
+ 
++    if [ "${X86_64_VERSION}" != "" ]; then
++        echo "Using x86_64_${X86_64_VERSION}" >&2
++        scripts/config --set-val X86_64_VERSION "${X86_64_VERSION}"
++    fi
+     %if %{signkernel}%{signmodules}
+     cp configs/x509.genkey certs/.
+     %endif
+@@ -2502,6 +2552,14 @@ BuildKernel() {
+     %{make} ARCH=$Arch KCFLAGS="$KCFLAGS" WITH_GCOV="%{?with_gcov}" %{?_smp_mflags} $MakeTarget %{?sparse_mflags} %{?kernel_mflags}
+     if [ $DoModules -eq 1 ]; then
+ 	%{make} ARCH=$Arch KCFLAGS="$KCFLAGS" WITH_GCOV="%{?with_gcov}" %{?_smp_mflags} modules %{?sparse_mflags} || exit 1
++	__KDIR="$(pwd)"
++	pushd "../open-gpu-kernel-modules-%{_nv_ver}"
++	    # BUILD NVIDIA
++	    LDFLAGS= %{make} \
++		    ARCH=$Arch KCFLAGS="$KCFLAGS" WITH_GCOV="%{?with_gcov}" %{?_smp_mflags} \
++				IGNORE_CC_MISMATCH=yes KERNEL_UNAME=%{KVERREL} "SYSSRC=${__KDIR}" "SYSOUT=${__DIR}" \
++				    modules %{?sparse_mflags} || exit 1
++	popd
+     fi
+ 
+     %{log_msg "Setup RPM_BUILD_ROOT directories"}
+@@ -2613,6 +2671,14 @@ BuildKernel() {
+ 	# Override $(mod-fw) because we don't want it to install any firmware
+ 	# we'll get it from the linux-firmware package and we don't want conflicts
+ 	%{make} %{?_smp_mflags} ARCH=$Arch INSTALL_MOD_PATH=$RPM_BUILD_ROOT %{?_smp_mflags} modules_install KERNELRELEASE=$KernelVer mod-fw=
++	__KDIR="$(pwd)"
++    pushd "../open-gpu-kernel-modules-%{_nv_ver}"
++    # INSTALL NVIDIA
++	    LDFLAGS= %{make} --debug=all \
++		    %{?_smp_mflags} ARCH=$Arch INSTALL_MOD_PATH=$RPM_BUILD_ROOT %{?_smp_mflags}   \
++				IGNORE_CC_MISMATCH=yes KERNEL_UNAME=%{KVERREL} "SYSSRC=${__KDIR}" "SYSOUT=${__KDIR}" \
++				    modules_install || exit 1
++	popd
+     fi
+ 
+ %if %{with_gcov}
+-- 
+2.52.0
+
