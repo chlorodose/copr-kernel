@@ -1,0 +1,881 @@
+From 0ff3c75e08c1a5e8de3016f4de4e5fa70e8754af Mon Sep 17 00:00:00 2001
+From: chlorodose <chlorodose@chlorodose.me>
+Date: Wed, 24 Jun 2026 08:38:11 +0800
+Subject: [PATCH] Add patch configs
+
+---
+ redhat/configs/common/debug/CONFIG_RUST_INLINE_HELPERS           | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_BDEV_LOOP              | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_1023        | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_127         | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_32767       | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_511         | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_BR_FUSE                | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_BR_HFSPLUS             | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_BR_RAMFS               | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_DEBUG                  | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_DIRREN                 | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_EXPORT                 | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_FHSM                   | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_FS                     | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_HFSNOTIFY              | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_HNOTIFY                | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_INO_T_64               | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_POLL                   | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_RDU                    | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_SBILIST                | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_SHWH                   | 1 +
+ redhat/configs/common/generic/CONFIG_AUFS_XATTR                  | 1 +
+ redhat/configs/common/generic/CONFIG_BCACHEFS_DEBUG              | 1 +
+ redhat/configs/common/generic/CONFIG_BCACHEFS_FS                 | 1 +
+ redhat/configs/common/generic/CONFIG_BCACHEFS_LOCK_TIME_STATS    | 1 +
+ redhat/configs/common/generic/CONFIG_BCACHEFS_NO_LATENCY_ACCT    | 1 +
+ redhat/configs/common/generic/CONFIG_BCACHEFS_PATH_TRACEPOINTS   | 1 +
+ redhat/configs/common/generic/CONFIG_BCACHEFS_QUOTA              | 1 +
+ .../configs/common/generic/CONFIG_BCACHEFS_SIX_OPTIMISTIC_SPIN   | 1 +
+ redhat/configs/common/generic/CONFIG_BCACHEFS_TESTS              | 1 +
+ .../configs/common/generic/CONFIG_BCACHEFS_TRANS_KMALLOC_TRACE   | 1 +
+ redhat/configs/common/generic/CONFIG_EXTCON_STEAMDECK            | 1 +
+ redhat/configs/common/generic/CONFIG_HZ_500                      | 1 +
+ redhat/configs/common/generic/CONFIG_LEDS_STEAMDECK              | 1 +
+ redhat/configs/common/generic/CONFIG_MEAN_AND_VARIANCE_UNIT_TEST | 1 +
+ .../common/generic/CONFIG_NETFILTER_XT_TARGET_FLOWOFFLOAD        | 1 +
+ redhat/configs/common/generic/CONFIG_NFT_FULLCONE                | 1 +
+ redhat/configs/common/generic/CONFIG_NVIDIA                      | 1 +
+ redhat/configs/common/generic/CONFIG_NVIDIA_DRM                  | 1 +
+ redhat/configs/common/generic/CONFIG_NVIDIA_MODESET              | 1 +
+ redhat/configs/common/generic/CONFIG_NVIDIA_PEERMEM              | 1 +
+ redhat/configs/common/generic/CONFIG_NVIDIA_UVM                  | 1 +
+ redhat/configs/common/generic/CONFIG_SENSORS_STEAMDECK           | 1 +
+ redhat/configs/common/generic/CONFIG_WARN_CONTEXT_ANALYSIS       | 1 +
+ redhat/configs/common/generic/CONFIG_WARN_CONTEXT_ANALYSIS_ALL   | 1 +
+ redhat/configs/common/generic/CONFIG_ZFS                         | 1 +
+ redhat/configs/common/generic/CONFIG_ZFS_DEBUG                   | 1 +
+ redhat/configs/common/generic/s390x/CONFIG_ZFS                   | 1 +
+ redhat/configs/common/generic/x86/CONFIG_GENERIC_CPU             | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MALDERLAKE              | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MBARCELONA              | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MBOBCAT                 | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MBROADWELL              | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MBULLDOZER              | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MCANNONLAKE             | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MCASCADELAKE            | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MCOOPERLAKE             | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MCORE2                  | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MEMERALDRAPIDS          | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MEXCAVATOR              | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MFD_STEAMDECK           | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MGOLDMONT               | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MGOLDMONTPLUS           | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MHASWELL                | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MICELAKE_CLIENT         | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MICELAKE_SERVER         | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MIVYBRIDGE              | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MJAGUAR                 | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MK10                    | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MK8                     | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MK8SSE3                 | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MMETEORLAKE             | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MNEHALEM                | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MPILEDRIVER             | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MPSC                    | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MRAPTORLAKE             | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MROCKETLAKE             | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MSANDYBRIDGE            | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MSAPPHIRERAPIDS         | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MSILVERMONT             | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MSKYLAKE                | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MSKYLAKEX               | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MSTEAMROLLER            | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MTIGERLAKE              | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MWESTMERE               | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MZEN                    | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MZEN2                   | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MZEN3                   | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MZEN4                   | 1 +
+ redhat/configs/common/generic/x86/CONFIG_MZEN5                   | 1 +
+ redhat/configs/common/generic/x86/CONFIG_X86_64_VERSION          | 1 +
+ redhat/configs/common/generic/x86/CONFIG_X86_NATIVE_CPU          | 1 +
+ redhat/configs/fedora/generic/x86/CONFIG_X86_64_VERSION          | 1 +
+ redhat/configs/rhel/{ => automotive}/generic/CONFIG_BCACHEFS_FS  | 0
+ .../generic/s390x/zfcpdump/CONFIG_ASYMMETRIC_PUBLIC_KEY_SUBTYPE  | 1 +
+ redhat/configs/rhel/generic/s390x/zfcpdump/CONFIG_BCACHEFS_FS    | 1 +
+ redhat/configs/rhel/generic/s390x/zfcpdump/CONFIG_DNS_RESOLVER   | 1 +
+ 97 files changed, 96 insertions(+)
+ create mode 100644 redhat/configs/common/debug/CONFIG_RUST_INLINE_HELPERS
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_BDEV_LOOP
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_1023
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_127
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_32767
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_511
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_BR_FUSE
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_BR_HFSPLUS
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_BR_RAMFS
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_DEBUG
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_DIRREN
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_EXPORT
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_FHSM
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_FS
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_HFSNOTIFY
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_HNOTIFY
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_INO_T_64
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_POLL
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_RDU
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_SBILIST
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_SHWH
+ create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_XATTR
+ create mode 100644 redhat/configs/common/generic/CONFIG_BCACHEFS_DEBUG
+ create mode 100644 redhat/configs/common/generic/CONFIG_BCACHEFS_FS
+ create mode 100644 redhat/configs/common/generic/CONFIG_BCACHEFS_LOCK_TIME_STATS
+ create mode 100644 redhat/configs/common/generic/CONFIG_BCACHEFS_NO_LATENCY_ACCT
+ create mode 100644 redhat/configs/common/generic/CONFIG_BCACHEFS_PATH_TRACEPOINTS
+ create mode 100644 redhat/configs/common/generic/CONFIG_BCACHEFS_QUOTA
+ create mode 100644 redhat/configs/common/generic/CONFIG_BCACHEFS_SIX_OPTIMISTIC_SPIN
+ create mode 100644 redhat/configs/common/generic/CONFIG_BCACHEFS_TESTS
+ create mode 100644 redhat/configs/common/generic/CONFIG_BCACHEFS_TRANS_KMALLOC_TRACE
+ create mode 100644 redhat/configs/common/generic/CONFIG_EXTCON_STEAMDECK
+ create mode 100644 redhat/configs/common/generic/CONFIG_HZ_500
+ create mode 100644 redhat/configs/common/generic/CONFIG_LEDS_STEAMDECK
+ create mode 100644 redhat/configs/common/generic/CONFIG_MEAN_AND_VARIANCE_UNIT_TEST
+ create mode 100644 redhat/configs/common/generic/CONFIG_NETFILTER_XT_TARGET_FLOWOFFLOAD
+ create mode 100644 redhat/configs/common/generic/CONFIG_NFT_FULLCONE
+ create mode 100644 redhat/configs/common/generic/CONFIG_NVIDIA
+ create mode 100644 redhat/configs/common/generic/CONFIG_NVIDIA_DRM
+ create mode 100644 redhat/configs/common/generic/CONFIG_NVIDIA_MODESET
+ create mode 100644 redhat/configs/common/generic/CONFIG_NVIDIA_PEERMEM
+ create mode 100644 redhat/configs/common/generic/CONFIG_NVIDIA_UVM
+ create mode 100644 redhat/configs/common/generic/CONFIG_SENSORS_STEAMDECK
+ create mode 100644 redhat/configs/common/generic/CONFIG_WARN_CONTEXT_ANALYSIS
+ create mode 100644 redhat/configs/common/generic/CONFIG_WARN_CONTEXT_ANALYSIS_ALL
+ create mode 100644 redhat/configs/common/generic/CONFIG_ZFS
+ create mode 100644 redhat/configs/common/generic/CONFIG_ZFS_DEBUG
+ create mode 100644 redhat/configs/common/generic/s390x/CONFIG_ZFS
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_GENERIC_CPU
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MALDERLAKE
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MBARCELONA
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MBOBCAT
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MBROADWELL
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MBULLDOZER
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MCANNONLAKE
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MCASCADELAKE
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MCOOPERLAKE
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MCORE2
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MEMERALDRAPIDS
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MEXCAVATOR
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MFD_STEAMDECK
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MGOLDMONT
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MGOLDMONTPLUS
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MHASWELL
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MICELAKE_CLIENT
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MICELAKE_SERVER
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MIVYBRIDGE
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MJAGUAR
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MK10
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MK8
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MK8SSE3
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MMETEORLAKE
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MNEHALEM
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MPILEDRIVER
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MPSC
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MRAPTORLAKE
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MROCKETLAKE
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MSANDYBRIDGE
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MSAPPHIRERAPIDS
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MSILVERMONT
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MSKYLAKE
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MSKYLAKEX
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MSTEAMROLLER
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MTIGERLAKE
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MWESTMERE
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MZEN
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MZEN2
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MZEN3
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MZEN4
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_MZEN5
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_X86_64_VERSION
+ create mode 100644 redhat/configs/common/generic/x86/CONFIG_X86_NATIVE_CPU
+ create mode 100644 redhat/configs/fedora/generic/x86/CONFIG_X86_64_VERSION
+ rename redhat/configs/rhel/{ => automotive}/generic/CONFIG_BCACHEFS_FS (100%)
+ create mode 100644 redhat/configs/rhel/generic/s390x/zfcpdump/CONFIG_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+ create mode 100644 redhat/configs/rhel/generic/s390x/zfcpdump/CONFIG_BCACHEFS_FS
+ create mode 100644 redhat/configs/rhel/generic/s390x/zfcpdump/CONFIG_DNS_RESOLVER
+
+diff --git a/redhat/configs/common/debug/CONFIG_RUST_INLINE_HELPERS b/redhat/configs/common/debug/CONFIG_RUST_INLINE_HELPERS
+new file mode 100644
+index 000000000..abc13e1e6
+--- /dev/null
++++ b/redhat/configs/common/debug/CONFIG_RUST_INLINE_HELPERS
+@@ -0,0 +1 @@
++CONFIG_RUST_INLINE_HELPERS=y
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_BDEV_LOOP b/redhat/configs/common/generic/CONFIG_AUFS_BDEV_LOOP
+new file mode 100644
+index 000000000..ee5a18130
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_BDEV_LOOP
+@@ -0,0 +1 @@
++CONFIG_AUFS_BDEV_LOOP=y
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_1023 b/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_1023
+new file mode 100644
+index 000000000..f0c8ed8bb
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_1023
+@@ -0,0 +1 @@
++# CONFIG_AUFS_BRANCH_MAX_1023 is not set
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_127 b/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_127
+new file mode 100644
+index 000000000..ecf2dbc6c
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_127
+@@ -0,0 +1 @@
++# CONFIG_AUFS_BRANCH_MAX_127 is not set
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_32767 b/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_32767
+new file mode 100644
+index 000000000..a432565ee
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_32767
+@@ -0,0 +1 @@
++# CONFIG_AUFS_BRANCH_MAX_32767 is not set
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_511 b/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_511
+new file mode 100644
+index 000000000..61f6ec422
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_511
+@@ -0,0 +1 @@
++CONFIG_AUFS_BRANCH_MAX_511=y
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_BR_FUSE b/redhat/configs/common/generic/CONFIG_AUFS_BR_FUSE
+new file mode 100644
+index 000000000..cae46275b
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_BR_FUSE
+@@ -0,0 +1 @@
++CONFIG_AUFS_BR_FUSE=y
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_BR_HFSPLUS b/redhat/configs/common/generic/CONFIG_AUFS_BR_HFSPLUS
+new file mode 100644
+index 000000000..6191f9077
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_BR_HFSPLUS
+@@ -0,0 +1 @@
++CONFIG_AUFS_BR_HFSPLUS=y
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_BR_RAMFS b/redhat/configs/common/generic/CONFIG_AUFS_BR_RAMFS
+new file mode 100644
+index 000000000..d298a20fc
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_BR_RAMFS
+@@ -0,0 +1 @@
++CONFIG_AUFS_BR_RAMFS=y
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_DEBUG b/redhat/configs/common/generic/CONFIG_AUFS_DEBUG
+new file mode 100644
+index 000000000..cacf535f2
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_DEBUG
+@@ -0,0 +1 @@
++# CONFIG_AUFS_DEBUG is not set
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_DIRREN b/redhat/configs/common/generic/CONFIG_AUFS_DIRREN
+new file mode 100644
+index 000000000..716d7b931
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_DIRREN
+@@ -0,0 +1 @@
++# CONFIG_AUFS_DIRREN is not set
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_EXPORT b/redhat/configs/common/generic/CONFIG_AUFS_EXPORT
+new file mode 100644
+index 000000000..1c0f9303e
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_EXPORT
+@@ -0,0 +1 @@
++CONFIG_AUFS_EXPORT=y
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_FHSM b/redhat/configs/common/generic/CONFIG_AUFS_FHSM
+new file mode 100644
+index 000000000..49bd2cb35
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_FHSM
+@@ -0,0 +1 @@
++CONFIG_AUFS_FHSM=y
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_FS b/redhat/configs/common/generic/CONFIG_AUFS_FS
+new file mode 100644
+index 000000000..18b56f78d
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_FS
+@@ -0,0 +1 @@
++CONFIG_AUFS_FS=m
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_HFSNOTIFY b/redhat/configs/common/generic/CONFIG_AUFS_HFSNOTIFY
+new file mode 100644
+index 000000000..75013a962
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_HFSNOTIFY
+@@ -0,0 +1 @@
++CONFIG_AUFS_HFSNOTIFY=y
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_HNOTIFY b/redhat/configs/common/generic/CONFIG_AUFS_HNOTIFY
+new file mode 100644
+index 000000000..9a677bfa9
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_HNOTIFY
+@@ -0,0 +1 @@
++CONFIG_AUFS_HNOTIFY=y
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_INO_T_64 b/redhat/configs/common/generic/CONFIG_AUFS_INO_T_64
+new file mode 100644
+index 000000000..435015eea
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_INO_T_64
+@@ -0,0 +1 @@
++CONFIG_AUFS_INO_T_64=y
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_POLL b/redhat/configs/common/generic/CONFIG_AUFS_POLL
+new file mode 100644
+index 000000000..02ec3d422
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_POLL
+@@ -0,0 +1 @@
++CONFIG_AUFS_POLL=y
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_RDU b/redhat/configs/common/generic/CONFIG_AUFS_RDU
+new file mode 100644
+index 000000000..0c439d17a
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_RDU
+@@ -0,0 +1 @@
++# CONFIG_AUFS_RDU is not set
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_SBILIST b/redhat/configs/common/generic/CONFIG_AUFS_SBILIST
+new file mode 100644
+index 000000000..5412c9504
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_SBILIST
+@@ -0,0 +1 @@
++CONFIG_AUFS_SBILIST=y
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_SHWH b/redhat/configs/common/generic/CONFIG_AUFS_SHWH
+new file mode 100644
+index 000000000..f67e1cdc8
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_SHWH
+@@ -0,0 +1 @@
++# CONFIG_AUFS_SHWH is not set
+diff --git a/redhat/configs/common/generic/CONFIG_AUFS_XATTR b/redhat/configs/common/generic/CONFIG_AUFS_XATTR
+new file mode 100644
+index 000000000..a59d36e74
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_AUFS_XATTR
+@@ -0,0 +1 @@
++CONFIG_AUFS_XATTR=y
+diff --git a/redhat/configs/common/generic/CONFIG_BCACHEFS_DEBUG b/redhat/configs/common/generic/CONFIG_BCACHEFS_DEBUG
+new file mode 100644
+index 000000000..c40d0c903
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_BCACHEFS_DEBUG
+@@ -0,0 +1 @@
++# CONFIG_BCACHEFS_DEBUG is not set
+diff --git a/redhat/configs/common/generic/CONFIG_BCACHEFS_FS b/redhat/configs/common/generic/CONFIG_BCACHEFS_FS
+new file mode 100644
+index 000000000..e66ee9b1e
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_BCACHEFS_FS
+@@ -0,0 +1 @@
++CONFIG_BCACHEFS_FS=m
+diff --git a/redhat/configs/common/generic/CONFIG_BCACHEFS_LOCK_TIME_STATS b/redhat/configs/common/generic/CONFIG_BCACHEFS_LOCK_TIME_STATS
+new file mode 100644
+index 000000000..22ce5ea09
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_BCACHEFS_LOCK_TIME_STATS
+@@ -0,0 +1 @@
++# CONFIG_BCACHEFS_LOCK_TIME_STATS is not set
+diff --git a/redhat/configs/common/generic/CONFIG_BCACHEFS_NO_LATENCY_ACCT b/redhat/configs/common/generic/CONFIG_BCACHEFS_NO_LATENCY_ACCT
+new file mode 100644
+index 000000000..6c9aacc67
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_BCACHEFS_NO_LATENCY_ACCT
+@@ -0,0 +1 @@
++# CONFIG_BCACHEFS_NO_LATENCY_ACCT is not set
+diff --git a/redhat/configs/common/generic/CONFIG_BCACHEFS_PATH_TRACEPOINTS b/redhat/configs/common/generic/CONFIG_BCACHEFS_PATH_TRACEPOINTS
+new file mode 100644
+index 000000000..c2bf8fe57
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_BCACHEFS_PATH_TRACEPOINTS
+@@ -0,0 +1 @@
++# CONFIG_BCACHEFS_PATH_TRACEPOINTS is not set
+diff --git a/redhat/configs/common/generic/CONFIG_BCACHEFS_QUOTA b/redhat/configs/common/generic/CONFIG_BCACHEFS_QUOTA
+new file mode 100644
+index 000000000..662f49930
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_BCACHEFS_QUOTA
+@@ -0,0 +1 @@
++CONFIG_BCACHEFS_QUOTA=y
+diff --git a/redhat/configs/common/generic/CONFIG_BCACHEFS_SIX_OPTIMISTIC_SPIN b/redhat/configs/common/generic/CONFIG_BCACHEFS_SIX_OPTIMISTIC_SPIN
+new file mode 100644
+index 000000000..d0b4bbe4a
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_BCACHEFS_SIX_OPTIMISTIC_SPIN
+@@ -0,0 +1 @@
++CONFIG_BCACHEFS_SIX_OPTIMISTIC_SPIN=y
+diff --git a/redhat/configs/common/generic/CONFIG_BCACHEFS_TESTS b/redhat/configs/common/generic/CONFIG_BCACHEFS_TESTS
+new file mode 100644
+index 000000000..50498d9ac
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_BCACHEFS_TESTS
+@@ -0,0 +1 @@
++# CONFIG_BCACHEFS_TESTS is not set
+diff --git a/redhat/configs/common/generic/CONFIG_BCACHEFS_TRANS_KMALLOC_TRACE b/redhat/configs/common/generic/CONFIG_BCACHEFS_TRANS_KMALLOC_TRACE
+new file mode 100644
+index 000000000..7c98f55b5
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_BCACHEFS_TRANS_KMALLOC_TRACE
+@@ -0,0 +1 @@
++# CONFIG_BCACHEFS_TRANS_KMALLOC_TRACE is not set
+diff --git a/redhat/configs/common/generic/CONFIG_EXTCON_STEAMDECK b/redhat/configs/common/generic/CONFIG_EXTCON_STEAMDECK
+new file mode 100644
+index 000000000..e19f767d9
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_EXTCON_STEAMDECK
+@@ -0,0 +1 @@
++CONFIG_EXTCON_STEAMDECK=m
+diff --git a/redhat/configs/common/generic/CONFIG_HZ_500 b/redhat/configs/common/generic/CONFIG_HZ_500
+new file mode 100644
+index 000000000..eb938cae9
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_HZ_500
+@@ -0,0 +1 @@
++# CONFIG_HZ_500 is not set
+diff --git a/redhat/configs/common/generic/CONFIG_LEDS_STEAMDECK b/redhat/configs/common/generic/CONFIG_LEDS_STEAMDECK
+new file mode 100644
+index 000000000..4f9f6e8f7
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_LEDS_STEAMDECK
+@@ -0,0 +1 @@
++CONFIG_LEDS_STEAMDECK=m
+diff --git a/redhat/configs/common/generic/CONFIG_MEAN_AND_VARIANCE_UNIT_TEST b/redhat/configs/common/generic/CONFIG_MEAN_AND_VARIANCE_UNIT_TEST
+new file mode 100644
+index 000000000..9697c29f6
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_MEAN_AND_VARIANCE_UNIT_TEST
+@@ -0,0 +1 @@
++CONFIG_MEAN_AND_VARIANCE_UNIT_TEST=m
+diff --git a/redhat/configs/common/generic/CONFIG_NETFILTER_XT_TARGET_FLOWOFFLOAD b/redhat/configs/common/generic/CONFIG_NETFILTER_XT_TARGET_FLOWOFFLOAD
+new file mode 100644
+index 000000000..b8e08f45c
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_NETFILTER_XT_TARGET_FLOWOFFLOAD
+@@ -0,0 +1 @@
++CONFIG_NETFILTER_XT_TARGET_FLOWOFFLOAD=m
+diff --git a/redhat/configs/common/generic/CONFIG_NFT_FULLCONE b/redhat/configs/common/generic/CONFIG_NFT_FULLCONE
+new file mode 100644
+index 000000000..8bf48f647
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_NFT_FULLCONE
+@@ -0,0 +1 @@
++CONFIG_NFT_FULLCONE=m
+diff --git a/redhat/configs/common/generic/CONFIG_NVIDIA b/redhat/configs/common/generic/CONFIG_NVIDIA
+new file mode 100644
+index 000000000..ccd91f231
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_NVIDIA
+@@ -0,0 +1 @@
++CONFIG_NVIDIA=m
+diff --git a/redhat/configs/common/generic/CONFIG_NVIDIA_DRM b/redhat/configs/common/generic/CONFIG_NVIDIA_DRM
+new file mode 100644
+index 000000000..64bc21961
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_NVIDIA_DRM
+@@ -0,0 +1 @@
++CONFIG_NVIDIA_DRM=m
+diff --git a/redhat/configs/common/generic/CONFIG_NVIDIA_MODESET b/redhat/configs/common/generic/CONFIG_NVIDIA_MODESET
+new file mode 100644
+index 000000000..2bf169b17
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_NVIDIA_MODESET
+@@ -0,0 +1 @@
++CONFIG_NVIDIA_MODESET=m
+diff --git a/redhat/configs/common/generic/CONFIG_NVIDIA_PEERMEM b/redhat/configs/common/generic/CONFIG_NVIDIA_PEERMEM
+new file mode 100644
+index 000000000..2ffc8318a
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_NVIDIA_PEERMEM
+@@ -0,0 +1 @@
++CONFIG_NVIDIA_PEERMEM=m
+diff --git a/redhat/configs/common/generic/CONFIG_NVIDIA_UVM b/redhat/configs/common/generic/CONFIG_NVIDIA_UVM
+new file mode 100644
+index 000000000..ea7d215ac
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_NVIDIA_UVM
+@@ -0,0 +1 @@
++CONFIG_NVIDIA_UVM=m
+diff --git a/redhat/configs/common/generic/CONFIG_SENSORS_STEAMDECK b/redhat/configs/common/generic/CONFIG_SENSORS_STEAMDECK
+new file mode 100644
+index 000000000..bd40b729d
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_SENSORS_STEAMDECK
+@@ -0,0 +1 @@
++CONFIG_SENSORS_STEAMDECK=m
+diff --git a/redhat/configs/common/generic/CONFIG_WARN_CONTEXT_ANALYSIS b/redhat/configs/common/generic/CONFIG_WARN_CONTEXT_ANALYSIS
+new file mode 100644
+index 000000000..fa1e3549f
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_WARN_CONTEXT_ANALYSIS
+@@ -0,0 +1 @@
++CONFIG_WARN_CONTEXT_ANALYSIS=y
+diff --git a/redhat/configs/common/generic/CONFIG_WARN_CONTEXT_ANALYSIS_ALL b/redhat/configs/common/generic/CONFIG_WARN_CONTEXT_ANALYSIS_ALL
+new file mode 100644
+index 000000000..062209db1
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_WARN_CONTEXT_ANALYSIS_ALL
+@@ -0,0 +1 @@
++# CONFIG_WARN_CONTEXT_ANALYSIS_ALL is not set
+diff --git a/redhat/configs/common/generic/CONFIG_ZFS b/redhat/configs/common/generic/CONFIG_ZFS
+new file mode 100644
+index 000000000..56055c15b
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_ZFS
+@@ -0,0 +1 @@
++CONFIG_ZFS=m
+diff --git a/redhat/configs/common/generic/CONFIG_ZFS_DEBUG b/redhat/configs/common/generic/CONFIG_ZFS_DEBUG
+new file mode 100644
+index 000000000..235786de9
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_ZFS_DEBUG
+@@ -0,0 +1 @@
++# CONFIG_ZFS_DEBUG is not set
+diff --git a/redhat/configs/common/generic/s390x/CONFIG_ZFS b/redhat/configs/common/generic/s390x/CONFIG_ZFS
+new file mode 100644
+index 000000000..04bfedc48
+--- /dev/null
++++ b/redhat/configs/common/generic/s390x/CONFIG_ZFS
+@@ -0,0 +1 @@
++CONFIG_ZFS=y
+diff --git a/redhat/configs/common/generic/x86/CONFIG_GENERIC_CPU b/redhat/configs/common/generic/x86/CONFIG_GENERIC_CPU
+new file mode 100644
+index 000000000..9cd8d3177
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_GENERIC_CPU
+@@ -0,0 +1 @@
++CONFIG_GENERIC_CPU=y
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MALDERLAKE b/redhat/configs/common/generic/x86/CONFIG_MALDERLAKE
+new file mode 100644
+index 000000000..40bb2af08
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MALDERLAKE
+@@ -0,0 +1 @@
++# CONFIG_MALDERLAKE is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MBARCELONA b/redhat/configs/common/generic/x86/CONFIG_MBARCELONA
+new file mode 100644
+index 000000000..8a140099e
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MBARCELONA
+@@ -0,0 +1 @@
++# CONFIG_MBARCELONA is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MBOBCAT b/redhat/configs/common/generic/x86/CONFIG_MBOBCAT
+new file mode 100644
+index 000000000..caa90f4f3
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MBOBCAT
+@@ -0,0 +1 @@
++# CONFIG_MBOBCAT is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MBROADWELL b/redhat/configs/common/generic/x86/CONFIG_MBROADWELL
+new file mode 100644
+index 000000000..8033e3fca
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MBROADWELL
+@@ -0,0 +1 @@
++# CONFIG_MBROADWELL is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MBULLDOZER b/redhat/configs/common/generic/x86/CONFIG_MBULLDOZER
+new file mode 100644
+index 000000000..89542c1e3
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MBULLDOZER
+@@ -0,0 +1 @@
++# CONFIG_MBULLDOZER is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MCANNONLAKE b/redhat/configs/common/generic/x86/CONFIG_MCANNONLAKE
+new file mode 100644
+index 000000000..1c66dbd91
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MCANNONLAKE
+@@ -0,0 +1 @@
++# CONFIG_MCANNONLAKE is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MCASCADELAKE b/redhat/configs/common/generic/x86/CONFIG_MCASCADELAKE
+new file mode 100644
+index 000000000..d7fe52b8b
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MCASCADELAKE
+@@ -0,0 +1 @@
++# CONFIG_MCASCADELAKE is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MCOOPERLAKE b/redhat/configs/common/generic/x86/CONFIG_MCOOPERLAKE
+new file mode 100644
+index 000000000..09bed5ba7
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MCOOPERLAKE
+@@ -0,0 +1 @@
++# CONFIG_MCOOPERLAKE is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MCORE2 b/redhat/configs/common/generic/x86/CONFIG_MCORE2
+new file mode 100644
+index 000000000..5d6819c2c
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MCORE2
+@@ -0,0 +1 @@
++# CONFIG_MCORE2 is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MEMERALDRAPIDS b/redhat/configs/common/generic/x86/CONFIG_MEMERALDRAPIDS
+new file mode 100644
+index 000000000..2776f6d63
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MEMERALDRAPIDS
+@@ -0,0 +1 @@
++# CONFIG_MEMERALDRAPIDS is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MEXCAVATOR b/redhat/configs/common/generic/x86/CONFIG_MEXCAVATOR
+new file mode 100644
+index 000000000..8f132c998
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MEXCAVATOR
+@@ -0,0 +1 @@
++# CONFIG_MEXCAVATOR is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MFD_STEAMDECK b/redhat/configs/common/generic/x86/CONFIG_MFD_STEAMDECK
+new file mode 100644
+index 000000000..e5b20ae66
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MFD_STEAMDECK
+@@ -0,0 +1 @@
++CONFIG_MFD_STEAMDECK=m
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MGOLDMONT b/redhat/configs/common/generic/x86/CONFIG_MGOLDMONT
+new file mode 100644
+index 000000000..0be0e3890
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MGOLDMONT
+@@ -0,0 +1 @@
++# CONFIG_MGOLDMONT is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MGOLDMONTPLUS b/redhat/configs/common/generic/x86/CONFIG_MGOLDMONTPLUS
+new file mode 100644
+index 000000000..df31e3086
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MGOLDMONTPLUS
+@@ -0,0 +1 @@
++# CONFIG_MGOLDMONTPLUS is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MHASWELL b/redhat/configs/common/generic/x86/CONFIG_MHASWELL
+new file mode 100644
+index 000000000..53bcdc609
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MHASWELL
+@@ -0,0 +1 @@
++# CONFIG_MHASWELL is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MICELAKE_CLIENT b/redhat/configs/common/generic/x86/CONFIG_MICELAKE_CLIENT
+new file mode 100644
+index 000000000..3aa93cab5
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MICELAKE_CLIENT
+@@ -0,0 +1 @@
++# CONFIG_MICELAKE_CLIENT is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MICELAKE_SERVER b/redhat/configs/common/generic/x86/CONFIG_MICELAKE_SERVER
+new file mode 100644
+index 000000000..6488fa908
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MICELAKE_SERVER
+@@ -0,0 +1 @@
++# CONFIG_MICELAKE_SERVER is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MIVYBRIDGE b/redhat/configs/common/generic/x86/CONFIG_MIVYBRIDGE
+new file mode 100644
+index 000000000..80fb3031e
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MIVYBRIDGE
+@@ -0,0 +1 @@
++# CONFIG_MIVYBRIDGE is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MJAGUAR b/redhat/configs/common/generic/x86/CONFIG_MJAGUAR
+new file mode 100644
+index 000000000..771c032e0
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MJAGUAR
+@@ -0,0 +1 @@
++# CONFIG_MJAGUAR is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MK10 b/redhat/configs/common/generic/x86/CONFIG_MK10
+new file mode 100644
+index 000000000..d2a63df66
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MK10
+@@ -0,0 +1 @@
++# CONFIG_MK10 is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MK8 b/redhat/configs/common/generic/x86/CONFIG_MK8
+new file mode 100644
+index 000000000..2f448241b
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MK8
+@@ -0,0 +1 @@
++# CONFIG_MK8 is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MK8SSE3 b/redhat/configs/common/generic/x86/CONFIG_MK8SSE3
+new file mode 100644
+index 000000000..722627e29
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MK8SSE3
+@@ -0,0 +1 @@
++# CONFIG_MK8SSE3 is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MMETEORLAKE b/redhat/configs/common/generic/x86/CONFIG_MMETEORLAKE
+new file mode 100644
+index 000000000..ee92a079d
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MMETEORLAKE
+@@ -0,0 +1 @@
++# CONFIG_MMETEORLAKE is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MNEHALEM b/redhat/configs/common/generic/x86/CONFIG_MNEHALEM
+new file mode 100644
+index 000000000..36118ff87
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MNEHALEM
+@@ -0,0 +1 @@
++# CONFIG_MNEHALEM is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MPILEDRIVER b/redhat/configs/common/generic/x86/CONFIG_MPILEDRIVER
+new file mode 100644
+index 000000000..bfad6126c
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MPILEDRIVER
+@@ -0,0 +1 @@
++# CONFIG_MPILEDRIVER is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MPSC b/redhat/configs/common/generic/x86/CONFIG_MPSC
+new file mode 100644
+index 000000000..8993bc823
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MPSC
+@@ -0,0 +1 @@
++# CONFIG_MPSC is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MRAPTORLAKE b/redhat/configs/common/generic/x86/CONFIG_MRAPTORLAKE
+new file mode 100644
+index 000000000..838f55567
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MRAPTORLAKE
+@@ -0,0 +1 @@
++# CONFIG_MRAPTORLAKE is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MROCKETLAKE b/redhat/configs/common/generic/x86/CONFIG_MROCKETLAKE
+new file mode 100644
+index 000000000..b42bd400e
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MROCKETLAKE
+@@ -0,0 +1 @@
++# CONFIG_MROCKETLAKE is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MSANDYBRIDGE b/redhat/configs/common/generic/x86/CONFIG_MSANDYBRIDGE
+new file mode 100644
+index 000000000..48c0955b7
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MSANDYBRIDGE
+@@ -0,0 +1 @@
++# CONFIG_MSANDYBRIDGE is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MSAPPHIRERAPIDS b/redhat/configs/common/generic/x86/CONFIG_MSAPPHIRERAPIDS
+new file mode 100644
+index 000000000..867b20a8d
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MSAPPHIRERAPIDS
+@@ -0,0 +1 @@
++# CONFIG_MSAPPHIRERAPIDS is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MSILVERMONT b/redhat/configs/common/generic/x86/CONFIG_MSILVERMONT
+new file mode 100644
+index 000000000..62f79a64f
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MSILVERMONT
+@@ -0,0 +1 @@
++# CONFIG_MSILVERMONT is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MSKYLAKE b/redhat/configs/common/generic/x86/CONFIG_MSKYLAKE
+new file mode 100644
+index 000000000..5aa33ddea
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MSKYLAKE
+@@ -0,0 +1 @@
++# CONFIG_MSKYLAKE is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MSKYLAKEX b/redhat/configs/common/generic/x86/CONFIG_MSKYLAKEX
+new file mode 100644
+index 000000000..b220ae9bd
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MSKYLAKEX
+@@ -0,0 +1 @@
++# CONFIG_MSKYLAKEX is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MSTEAMROLLER b/redhat/configs/common/generic/x86/CONFIG_MSTEAMROLLER
+new file mode 100644
+index 000000000..2aa97f522
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MSTEAMROLLER
+@@ -0,0 +1 @@
++# CONFIG_MSTEAMROLLER is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MTIGERLAKE b/redhat/configs/common/generic/x86/CONFIG_MTIGERLAKE
+new file mode 100644
+index 000000000..988d3f6af
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MTIGERLAKE
+@@ -0,0 +1 @@
++# CONFIG_MTIGERLAKE is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MWESTMERE b/redhat/configs/common/generic/x86/CONFIG_MWESTMERE
+new file mode 100644
+index 000000000..cc34e3842
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MWESTMERE
+@@ -0,0 +1 @@
++# CONFIG_MWESTMERE is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MZEN b/redhat/configs/common/generic/x86/CONFIG_MZEN
+new file mode 100644
+index 000000000..f33202cb8
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MZEN
+@@ -0,0 +1 @@
++# CONFIG_MZEN is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MZEN2 b/redhat/configs/common/generic/x86/CONFIG_MZEN2
+new file mode 100644
+index 000000000..71fa2a2ba
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MZEN2
+@@ -0,0 +1 @@
++# CONFIG_MZEN2 is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MZEN3 b/redhat/configs/common/generic/x86/CONFIG_MZEN3
+new file mode 100644
+index 000000000..63016f62c
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MZEN3
+@@ -0,0 +1 @@
++# CONFIG_MZEN3 is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MZEN4 b/redhat/configs/common/generic/x86/CONFIG_MZEN4
+new file mode 100644
+index 000000000..c49e7f875
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MZEN4
+@@ -0,0 +1 @@
++# CONFIG_MZEN4 is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_MZEN5 b/redhat/configs/common/generic/x86/CONFIG_MZEN5
+new file mode 100644
+index 000000000..aa563ea64
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_MZEN5
+@@ -0,0 +1 @@
++# CONFIG_MZEN5 is not set
+diff --git a/redhat/configs/common/generic/x86/CONFIG_X86_64_VERSION b/redhat/configs/common/generic/x86/CONFIG_X86_64_VERSION
+new file mode 100644
+index 000000000..2426883d2
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_X86_64_VERSION
+@@ -0,0 +1 @@
++CONFIG_X86_64_VERSION=1
+diff --git a/redhat/configs/common/generic/x86/CONFIG_X86_NATIVE_CPU b/redhat/configs/common/generic/x86/CONFIG_X86_NATIVE_CPU
+new file mode 100644
+index 000000000..45ffe5119
+--- /dev/null
++++ b/redhat/configs/common/generic/x86/CONFIG_X86_NATIVE_CPU
+@@ -0,0 +1 @@
++# CONFIG_X86_NATIVE_CPU is not set
+diff --git a/redhat/configs/fedora/generic/x86/CONFIG_X86_64_VERSION b/redhat/configs/fedora/generic/x86/CONFIG_X86_64_VERSION
+new file mode 100644
+index 000000000..d76f8d233
+--- /dev/null
++++ b/redhat/configs/fedora/generic/x86/CONFIG_X86_64_VERSION
+@@ -0,0 +1 @@
++CONFIG_X86_64_VERSION=3
+diff --git a/redhat/configs/rhel/generic/CONFIG_BCACHEFS_FS b/redhat/configs/rhel/automotive/generic/CONFIG_BCACHEFS_FS
+similarity index 100%
+rename from redhat/configs/rhel/generic/CONFIG_BCACHEFS_FS
+rename to redhat/configs/rhel/automotive/generic/CONFIG_BCACHEFS_FS
+diff --git a/redhat/configs/rhel/generic/s390x/zfcpdump/CONFIG_ASYMMETRIC_PUBLIC_KEY_SUBTYPE b/redhat/configs/rhel/generic/s390x/zfcpdump/CONFIG_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+new file mode 100644
+index 000000000..ad066c16a
+--- /dev/null
++++ b/redhat/configs/rhel/generic/s390x/zfcpdump/CONFIG_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+@@ -0,0 +1 @@
++# CONFIG_ASYMMETRIC_PUBLIC_KEY_SUBTYPE is not set
+diff --git a/redhat/configs/rhel/generic/s390x/zfcpdump/CONFIG_BCACHEFS_FS b/redhat/configs/rhel/generic/s390x/zfcpdump/CONFIG_BCACHEFS_FS
+new file mode 100644
+index 000000000..006b609bc
+--- /dev/null
++++ b/redhat/configs/rhel/generic/s390x/zfcpdump/CONFIG_BCACHEFS_FS
+@@ -0,0 +1 @@
++# CONFIG_BCACHEFS_FS is not set
+diff --git a/redhat/configs/rhel/generic/s390x/zfcpdump/CONFIG_DNS_RESOLVER b/redhat/configs/rhel/generic/s390x/zfcpdump/CONFIG_DNS_RESOLVER
+new file mode 100644
+index 000000000..924c99bf4
+--- /dev/null
++++ b/redhat/configs/rhel/generic/s390x/zfcpdump/CONFIG_DNS_RESOLVER
+@@ -0,0 +1 @@
++# CONFIG_DNS_RESOLVER is not set
+-- 
+2.54.0
+
