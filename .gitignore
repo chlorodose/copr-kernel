@@ -1,0 +1,4 @@
+/kernel
+/rpmbuild
+/*.src.rpm
+/_*
