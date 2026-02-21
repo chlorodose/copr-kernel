@@ -1,0 +1,156 @@
+From 0abac902d427af65ce57e3b5eaabe198f2d3de35 Mon Sep 17 00:00:00 2001
+From: chlorodose <chlorodose@chlorodose.me>
+Date: Sun, 3 May 2026 23:40:47 +0800
+Subject: [PATCH] Patch build files
+
+---
+ kernel.spec | 35 +++++++++--------------------------
+ sources     |  1 -
+ 2 files changed, 9 insertions(+), 27 deletions(-)
+
+diff --git a/kernel.spec b/kernel.spec
+index 1c22f9f..f8bf04b 100644
+--- a/kernel.spec
++++ b/kernel.spec
+@@ -15,16 +15,11 @@
+ # Option to enable compiling with clang instead of gcc.
+ %bcond_with toolchain_clang
+ 
+-%if %{with toolchain_clang}
+ %global toolchain clang
+-%endif
+ 
+ # Compile the kernel with LTO (only supported when building with clang).
+ %bcond_with clang_lto
+ 
+-%if %{with clang_lto} && %{without toolchain_clang}
+-{error:clang_lto requires --with toolchain_clang}
+-%endif
+ 
+ # RPM macros strip everything in BUILDROOT, either with __strip
+ # or find-debuginfo.sh. Make use of __spec_install_post override
+@@ -147,9 +142,9 @@ Summary: The Linux kernel
+ %endif
+ 
+ # Default compression algorithm
+-%global compression xz
+-%global compression_flags --compress --check=crc32 --lzma2=dict=1MiB
+-%global compext xz
++%global compression zstd
++%global compression_flags --rm --ultra -22 --long -T0
++%global compext zst
+ 
+ %if 0%{?fedora}
+ %define primary_target fedora
+@@ -190,13 +185,13 @@ Summary: The Linux kernel
+ %define specrpmversion 7.0.0
+ %define specversion 7.0.0
+ %define patchversion 7.0
+-%define pkgrelease 62
++%define pkgrelease cl
+ %define kversion 7
+-%define tarfile_release 7.0
++%define tarfile_release 7.0.0
+ # This is needed to do merge window version magic
+ %define patchlevel 0
+ # This allows pkg_release to have configurable %%{?dist} tag
+-%define specrelease 62%{?buildid}%{?dist}
++%define specrelease %{pkgrelease}%{?buildid}%{?dist}
+ # This defines the kabi tarball version
+ %define kabiversion 7.0.0
+ 
+@@ -236,7 +231,7 @@ Summary: The Linux kernel
+ #      with_base controls base vs debug within those variants
+ %define with_base      %{?_without_base:      0} %{?!_without_base:      1}
+ # build also debug variants
+-%define with_debug     %{?_without_debug:     0} %{?!_without_debug:     1}
++%define with_debug     0
+ # kernel-zfcpdump (s390 specific kernel for zfcpdump)
+ %define with_zfcpdump  %{?_without_zfcpdump:  0} %{?!_without_zfcpdump:  1}
+ # kernel-16k (aarch64 kernel with 16K page_size)
+@@ -330,7 +325,7 @@ Summary: The Linux kernel
+ 
+ #
+ # check for mismatched config options
+-%define with_configchecks %{?_without_configchecks:        0} %{?!_without_configchecks:        1}
++%define with_configchecks 0
+ 
+ #
+ # gcov support
+@@ -372,7 +367,6 @@ Summary: The Linux kernel
+ %define make_opts -s
+ %endif
+ 
+-%if %{with toolchain_clang}
+ %ifarch s390x ppc64le
+ %global llvm_ias 0
+ %else
+@@ -380,7 +374,6 @@ Summary: The Linux kernel
+ %endif
+ %global clang_make_opts HOSTCC=clang CC=clang LLVM_IAS=%{llvm_ias} LLVM=1
+ %global make_opts %{make_opts} %{clang_make_opts}
+-%endif
+ 
+ # turn off debug kernel and kabichk for gcov builds
+ %if %{with_gcov}
+@@ -941,15 +934,11 @@ BuildRequires: xmlto
+ BuildRequires: asciidoc
+ %endif
+ 
+-%if %{with toolchain_clang}
+ BuildRequires: clang
+ BuildRequires: lld
+-%endif
+ 
+-%if %{with clang_lto}
+ BuildRequires: llvm
+ BuildRequires: lld
+-%endif
+ 
+ %if %{with_efiuki}
+ BuildRequires: dracut
+@@ -989,7 +978,7 @@ BuildRequires: redhat-sb-certs >= 9.4-0.1
+ # exact git commit you can run
+ #
+ # xzcat -qq ${TARBALL} | git get-tar-commit-id
+-Source0: linux-%{tarfile_release}.tar.xz
++Source0: source.tar.zst
+ 
+ Source1: Makefile.rhelver
+ Source2: %{name}.changelog
+@@ -2237,12 +2226,8 @@ PARTIAL_CONFIGS=""
+ %if %{with_gcov}
+ PARTIAL_CONFIGS="$PARTIAL_CONFIGS %{SOURCE70} %{SOURCE71}"
+ %endif
+-%if %{with toolchain_clang}
+ PARTIAL_CONFIGS="$PARTIAL_CONFIGS %{SOURCE72} %{SOURCE73}"
+-%endif
+-%if %{with clang_lto}
+ PARTIAL_CONFIGS="$PARTIAL_CONFIGS %{SOURCE74} %{SOURCE75} %{SOURCE76} %{SOURCE77}"
+-%endif
+ PARTIAL_CONFIGS="$PARTIAL_CONFIGS partial-kernel-local-snip.config partial-kernel-local-debug-snip.config"
+ 
+ GetArch()
+@@ -2330,11 +2315,9 @@ OPTS="-w -n -c"
+ %if !%{with_configchecks}
+ 	OPTS="$OPTS -i"
+ %endif
+-%if %{with clang_lto}
+ for opt in %{clang_make_opts}; do
+   OPTS="$OPTS -m $opt"
+ done
+-%endif
+ %{log_msg "Generate redhat configs"}
+ RHJOBS=$RPM_BUILD_NCPUS SPECPACKAGE_NAME=%{name} ./process_configs.sh $OPTS %{specrpmversion}
+ 
+diff --git a/sources b/sources
+index e2d0339..1045033 100644
+--- a/sources
++++ b/sources
+@@ -1,3 +1,2 @@
+-SHA512 (linux-7.0.tar.xz) = 965062e738c772f9faf17bf53386f2eea628bff7952021fe0246297eb127495b9f2a47e87bfe1cf78143985885981ed3210270f415bafad5eeb2ae424736973b
+ SHA512 (kernel-abi-stablelists-7.0.0.tar.xz) = 5630c14d75eb4ce731431392cf54858524fb7a15de5c6fc80b13131a90c7b5318f33effeb5654f473fb11a7a1ac6bf1b2171ab87bc0363b73312b45763718bbb
+ SHA512 (kernel-kabi-dw-7.0.0.tar.xz) = d8affa7b0b022025016a722aa8ea26eabd7d7992eb1ac3ee0a73745a58e062e3fad9a21b49e1193520c17ed4a436d029e32b623b3720964eb015cb8123dce3f0
+-- 
+2.52.0
+
