@@ -1,31 +1,11 @@
-From 0ff3c75e08c1a5e8de3016f4de4e5fa70e8754af Mon Sep 17 00:00:00 2001
+From ad07ceefde0d9a6ec7138f99c0c42bfa3e7c7d55 Mon Sep 17 00:00:00 2001
 From: chlorodose <chlorodose@chlorodose.me>
 Date: Wed, 24 Jun 2026 08:38:11 +0800
 Subject: [PATCH] Add patch configs
 
 ---
  redhat/configs/common/debug/CONFIG_RUST_INLINE_HELPERS           | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_BDEV_LOOP              | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_1023        | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_127         | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_32767       | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_511         | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_BR_FUSE                | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_BR_HFSPLUS             | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_BR_RAMFS               | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_DEBUG                  | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_DIRREN                 | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_EXPORT                 | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_FHSM                   | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_FS                     | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_HFSNOTIFY              | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_HNOTIFY                | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_INO_T_64               | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_POLL                   | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_RDU                    | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_SBILIST                | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_SHWH                   | 1 +
- redhat/configs/common/generic/CONFIG_AUFS_XATTR                  | 1 +
+ redhat/configs/common/generic/CONFIG_ANON_MIN_RATIO              | 1 +
  redhat/configs/common/generic/CONFIG_BCACHEFS_DEBUG              | 1 +
  redhat/configs/common/generic/CONFIG_BCACHEFS_FS                 | 1 +
  redhat/configs/common/generic/CONFIG_BCACHEFS_LOCK_TIME_STATS    | 1 +
@@ -35,6 +15,8 @@ Subject: [PATCH] Add patch configs
  .../configs/common/generic/CONFIG_BCACHEFS_SIX_OPTIMISTIC_SPIN   | 1 +
  redhat/configs/common/generic/CONFIG_BCACHEFS_TESTS              | 1 +
  .../configs/common/generic/CONFIG_BCACHEFS_TRANS_KMALLOC_TRACE   | 1 +
+ redhat/configs/common/generic/CONFIG_CLEAN_LOW_RATIO             | 1 +
+ redhat/configs/common/generic/CONFIG_CLEAN_MIN_RATIO             | 1 +
  redhat/configs/common/generic/CONFIG_EXTCON_STEAMDECK            | 1 +
  redhat/configs/common/generic/CONFIG_HZ_500                      | 1 +
  redhat/configs/common/generic/CONFIG_LEDS_STEAMDECK              | 1 +
@@ -101,29 +83,9 @@ Subject: [PATCH] Add patch configs
  .../generic/s390x/zfcpdump/CONFIG_ASYMMETRIC_PUBLIC_KEY_SUBTYPE  | 1 +
  redhat/configs/rhel/generic/s390x/zfcpdump/CONFIG_BCACHEFS_FS    | 1 +
  redhat/configs/rhel/generic/s390x/zfcpdump/CONFIG_DNS_RESOLVER   | 1 +
- 97 files changed, 96 insertions(+)
+ 79 files changed, 78 insertions(+)
  create mode 100644 redhat/configs/common/debug/CONFIG_RUST_INLINE_HELPERS
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_BDEV_LOOP
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_1023
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_127
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_32767
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_511
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_BR_FUSE
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_BR_HFSPLUS
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_BR_RAMFS
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_DEBUG
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_DIRREN
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_EXPORT
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_FHSM
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_FS
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_HFSNOTIFY
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_HNOTIFY
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_INO_T_64
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_POLL
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_RDU
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_SBILIST
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_SHWH
- create mode 100644 redhat/configs/common/generic/CONFIG_AUFS_XATTR
+ create mode 100644 redhat/configs/common/generic/CONFIG_ANON_MIN_RATIO
  create mode 100644 redhat/configs/common/generic/CONFIG_BCACHEFS_DEBUG
  create mode 100644 redhat/configs/common/generic/CONFIG_BCACHEFS_FS
  create mode 100644 redhat/configs/common/generic/CONFIG_BCACHEFS_LOCK_TIME_STATS
@@ -133,6 +95,8 @@ Subject: [PATCH] Add patch configs
  create mode 100644 redhat/configs/common/generic/CONFIG_BCACHEFS_SIX_OPTIMISTIC_SPIN
  create mode 100644 redhat/configs/common/generic/CONFIG_BCACHEFS_TESTS
  create mode 100644 redhat/configs/common/generic/CONFIG_BCACHEFS_TRANS_KMALLOC_TRACE
+ create mode 100644 redhat/configs/common/generic/CONFIG_CLEAN_LOW_RATIO
+ create mode 100644 redhat/configs/common/generic/CONFIG_CLEAN_MIN_RATIO
  create mode 100644 redhat/configs/common/generic/CONFIG_EXTCON_STEAMDECK
  create mode 100644 redhat/configs/common/generic/CONFIG_HZ_500
  create mode 100644 redhat/configs/common/generic/CONFIG_LEDS_STEAMDECK
@@ -207,153 +171,13 @@ index 000000000..abc13e1e6
 +++ b/redhat/configs/common/debug/CONFIG_RUST_INLINE_HELPERS
 @@ -0,0 +1 @@
 +CONFIG_RUST_INLINE_HELPERS=y
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_BDEV_LOOP b/redhat/configs/common/generic/CONFIG_AUFS_BDEV_LOOP
+diff --git a/redhat/configs/common/generic/CONFIG_ANON_MIN_RATIO b/redhat/configs/common/generic/CONFIG_ANON_MIN_RATIO
 new file mode 100644
-index 000000000..ee5a18130
+index 000000000..a51be6ed2
 --- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_BDEV_LOOP
++++ b/redhat/configs/common/generic/CONFIG_ANON_MIN_RATIO
 @@ -0,0 +1 @@
-+CONFIG_AUFS_BDEV_LOOP=y
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_1023 b/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_1023
-new file mode 100644
-index 000000000..f0c8ed8bb
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_1023
-@@ -0,0 +1 @@
-+# CONFIG_AUFS_BRANCH_MAX_1023 is not set
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_127 b/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_127
-new file mode 100644
-index 000000000..ecf2dbc6c
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_127
-@@ -0,0 +1 @@
-+# CONFIG_AUFS_BRANCH_MAX_127 is not set
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_32767 b/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_32767
-new file mode 100644
-index 000000000..a432565ee
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_32767
-@@ -0,0 +1 @@
-+# CONFIG_AUFS_BRANCH_MAX_32767 is not set
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_511 b/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_511
-new file mode 100644
-index 000000000..61f6ec422
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_BRANCH_MAX_511
-@@ -0,0 +1 @@
-+CONFIG_AUFS_BRANCH_MAX_511=y
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_BR_FUSE b/redhat/configs/common/generic/CONFIG_AUFS_BR_FUSE
-new file mode 100644
-index 000000000..cae46275b
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_BR_FUSE
-@@ -0,0 +1 @@
-+CONFIG_AUFS_BR_FUSE=y
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_BR_HFSPLUS b/redhat/configs/common/generic/CONFIG_AUFS_BR_HFSPLUS
-new file mode 100644
-index 000000000..6191f9077
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_BR_HFSPLUS
-@@ -0,0 +1 @@
-+CONFIG_AUFS_BR_HFSPLUS=y
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_BR_RAMFS b/redhat/configs/common/generic/CONFIG_AUFS_BR_RAMFS
-new file mode 100644
-index 000000000..d298a20fc
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_BR_RAMFS
-@@ -0,0 +1 @@
-+CONFIG_AUFS_BR_RAMFS=y
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_DEBUG b/redhat/configs/common/generic/CONFIG_AUFS_DEBUG
-new file mode 100644
-index 000000000..cacf535f2
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_DEBUG
-@@ -0,0 +1 @@
-+# CONFIG_AUFS_DEBUG is not set
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_DIRREN b/redhat/configs/common/generic/CONFIG_AUFS_DIRREN
-new file mode 100644
-index 000000000..716d7b931
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_DIRREN
-@@ -0,0 +1 @@
-+# CONFIG_AUFS_DIRREN is not set
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_EXPORT b/redhat/configs/common/generic/CONFIG_AUFS_EXPORT
-new file mode 100644
-index 000000000..1c0f9303e
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_EXPORT
-@@ -0,0 +1 @@
-+CONFIG_AUFS_EXPORT=y
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_FHSM b/redhat/configs/common/generic/CONFIG_AUFS_FHSM
-new file mode 100644
-index 000000000..49bd2cb35
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_FHSM
-@@ -0,0 +1 @@
-+CONFIG_AUFS_FHSM=y
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_FS b/redhat/configs/common/generic/CONFIG_AUFS_FS
-new file mode 100644
-index 000000000..18b56f78d
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_FS
-@@ -0,0 +1 @@
-+CONFIG_AUFS_FS=m
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_HFSNOTIFY b/redhat/configs/common/generic/CONFIG_AUFS_HFSNOTIFY
-new file mode 100644
-index 000000000..75013a962
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_HFSNOTIFY
-@@ -0,0 +1 @@
-+CONFIG_AUFS_HFSNOTIFY=y
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_HNOTIFY b/redhat/configs/common/generic/CONFIG_AUFS_HNOTIFY
-new file mode 100644
-index 000000000..9a677bfa9
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_HNOTIFY
-@@ -0,0 +1 @@
-+CONFIG_AUFS_HNOTIFY=y
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_INO_T_64 b/redhat/configs/common/generic/CONFIG_AUFS_INO_T_64
-new file mode 100644
-index 000000000..435015eea
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_INO_T_64
-@@ -0,0 +1 @@
-+CONFIG_AUFS_INO_T_64=y
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_POLL b/redhat/configs/common/generic/CONFIG_AUFS_POLL
-new file mode 100644
-index 000000000..02ec3d422
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_POLL
-@@ -0,0 +1 @@
-+CONFIG_AUFS_POLL=y
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_RDU b/redhat/configs/common/generic/CONFIG_AUFS_RDU
-new file mode 100644
-index 000000000..0c439d17a
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_RDU
-@@ -0,0 +1 @@
-+# CONFIG_AUFS_RDU is not set
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_SBILIST b/redhat/configs/common/generic/CONFIG_AUFS_SBILIST
-new file mode 100644
-index 000000000..5412c9504
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_SBILIST
-@@ -0,0 +1 @@
-+CONFIG_AUFS_SBILIST=y
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_SHWH b/redhat/configs/common/generic/CONFIG_AUFS_SHWH
-new file mode 100644
-index 000000000..f67e1cdc8
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_SHWH
-@@ -0,0 +1 @@
-+# CONFIG_AUFS_SHWH is not set
-diff --git a/redhat/configs/common/generic/CONFIG_AUFS_XATTR b/redhat/configs/common/generic/CONFIG_AUFS_XATTR
-new file mode 100644
-index 000000000..a59d36e74
---- /dev/null
-+++ b/redhat/configs/common/generic/CONFIG_AUFS_XATTR
-@@ -0,0 +1 @@
-+CONFIG_AUFS_XATTR=y
++CONFIG_ANON_MIN_RATIO=15
 diff --git a/redhat/configs/common/generic/CONFIG_BCACHEFS_DEBUG b/redhat/configs/common/generic/CONFIG_BCACHEFS_DEBUG
 new file mode 100644
 index 000000000..c40d0c903
@@ -417,6 +241,20 @@ index 000000000..7c98f55b5
 +++ b/redhat/configs/common/generic/CONFIG_BCACHEFS_TRANS_KMALLOC_TRACE
 @@ -0,0 +1 @@
 +# CONFIG_BCACHEFS_TRANS_KMALLOC_TRACE is not set
+diff --git a/redhat/configs/common/generic/CONFIG_CLEAN_LOW_RATIO b/redhat/configs/common/generic/CONFIG_CLEAN_LOW_RATIO
+new file mode 100644
+index 000000000..cc93f99e2
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_CLEAN_LOW_RATIO
+@@ -0,0 +1 @@
++CONFIG_CLEAN_LOW_RATIO=0
+diff --git a/redhat/configs/common/generic/CONFIG_CLEAN_MIN_RATIO b/redhat/configs/common/generic/CONFIG_CLEAN_MIN_RATIO
+new file mode 100644
+index 000000000..c7f501909
+--- /dev/null
++++ b/redhat/configs/common/generic/CONFIG_CLEAN_MIN_RATIO
+@@ -0,0 +1 @@
++CONFIG_CLEAN_MIN_RATIO=15
 diff --git a/redhat/configs/common/generic/CONFIG_EXTCON_STEAMDECK b/redhat/configs/common/generic/CONFIG_EXTCON_STEAMDECK
 new file mode 100644
 index 000000000..e19f767d9
@@ -877,5 +715,5 @@ index 000000000..924c99bf4
 @@ -0,0 +1 @@
 +# CONFIG_DNS_RESOLVER is not set
 -- 
-2.54.0
+2.55.0
 
