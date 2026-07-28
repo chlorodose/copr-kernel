@@ -8,7 +8,7 @@ BuildArch:      noarch
 Provides:       %{name} = 3:%{version}
 Provides:       nvidia-kmod = 3:%{version} 
 
-Requires:       modalias(of:N*T*Cnvidia_tegra2[36]4-display) >= %{version}
+Requires:       modalias(of:N*T*Cnvidia_tegra2[36]4-display) = %{version}
 
 %description
 This is a dummy package.
